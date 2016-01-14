@@ -36,6 +36,8 @@ configure do
   # - false = Disabled
   set :sessions, true
 
+  set :session_secret, ENV['SESSION_SECRET']
+
 end
 
 ###################################################
