@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'mysql2'
 gem 'rake'
+gem 'dotenv'
 
 group :development do
   gem 'rerun'
