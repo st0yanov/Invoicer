@@ -50,6 +50,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   dotenv
   mysql2
   rake

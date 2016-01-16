@@ -18,14 +18,11 @@ configure do
   # The directory used as a base for the application.
   set :root, File.dirname(File.expand_path('../..', __FILE__))
 
-  # Main Application File.
-  set :app_file, Proc.new { File.join(root, 'app.rb') }
-
   # The directory where static files should be served from.
   set :public_folder, Proc.new { File.join(root, 'public') }
 
   # The directory where view templates are located.
-  set :views, Proc.new { File.join(root, 'app/views') }
+  set :views, Proc.new { File.join(root, 'app', 'views') }
 
   ###################################################
   ################ Sessions Settings ################
@@ -36,7 +33,7 @@ configure do
   # - false = Disabled
   set :sessions, true
 
-  set :session_secret, ENV['SESSION_SECRET']
+  set :session_secret, ENV['SESSION_SECRET'] or 'supersecret'
 
 end
 

@@ -1,9 +1,18 @@
 require 'rubygems'
-require 'bundler'
+require 'bundler/setup'
 
-Bundler.require
+require 'active_support/all'
 
-require_relative 'app'
+require 'sinatra'
+require 'sinatra/activerecord'
+require 'dotenv'
+
+require File.expand_path('../app/config/app', __FILE__)
+
+configure do
+  set :app_file, __FILE__
+end
+
 run Sinatra::Application
 
 # Loads the environment specific settings
