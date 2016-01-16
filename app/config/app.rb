@@ -45,7 +45,7 @@ configure :development do
   enable :dump_errors, :raise_errors, :show_exceptions
 end
 
-configure :test
+configure :test do
    disable :show_exceptions
 end
 
