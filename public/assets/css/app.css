@@ -1,0 +1,16 @@
+.log-in-form {
+	border: 1px solid #cacaca;
+	padding: 16px !important;
+	border-radius: 3px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+}
+
+@media(max-width: 400px) {
+	.log-in-form {
+		width: 90%;
+	}
+}

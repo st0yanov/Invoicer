@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'active_support/all'
 
 require 'sinatra'
+require 'sinatra/contrib'
 require 'sinatra/activerecord'
 require 'dotenv'
 

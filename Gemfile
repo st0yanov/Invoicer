@@ -6,6 +6,7 @@ gem 'mysql2'
 gem 'rake'
 gem 'dotenv'
 gem 'activesupport'
+gem 'sinatra-contrib'
 
 group :development do
   gem 'rerun'

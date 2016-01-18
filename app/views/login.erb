@@ -1,0 +1,24 @@
+<% content_for :page_title do %>Login<% end %>
+
+<% content_for :page_content do %>
+	<div class="medium-6 medium-centered large-4 large-centered columns">
+		<form>
+			<div class="row column log-in-form">
+				<h4 class="text-center">Вход</h4>
+				<label>Имейл:
+					<input type="text" placeholder="somebody@example.com">
+				</label>
+
+				<label>Парола:
+					<input type="password" placeholder="Парола">
+				</label>
+
+				<input id="remember-me" type="checkbox"><label for="remember-me">Запомни ме!</label>
+
+				<p><a type="submit" class="button expanded">Вход</a></p>
+
+				<p class="text-center"><a href="#">Забравена парола?</a></p>
+			</div>
+		</form>
+	</div>
+<% end %>

@@ -5,7 +5,7 @@ Dir[models_dir].each do |model|
   autoload ActiveSupport::Inflector.camelize(model_name), model
 end
 
-# Now let's require all our routes (controllers).
+# Now let's s.require all our routes (controllers).
 routes_dir = File.join(File.expand_path('../routes', __FILE__), '*.rb')
 Dir[routes_dir].each do |route|
   require route
