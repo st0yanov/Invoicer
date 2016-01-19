@@ -6,9 +6,11 @@ gem 'rake'
 gem 'dotenv'
 gem 'activesupport'
 gem 'sinatra-contrib'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'rerun'
+  gem 'pry'
   gem 'sqlite3'
 end
 

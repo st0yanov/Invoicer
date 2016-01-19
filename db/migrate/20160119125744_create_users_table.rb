@@ -4,8 +4,8 @@ class CreateUsersTable < ActiveRecord::Migration
       t.string :username, limit: 32
       t.string :password
       t.boolean :active
-      t.integer :user_level, limit: 2
-      t.string :last_ip, limit: 15
+      t.integer :level, limit: 2
+      t.string :last_ip, limit: 15, null: true, default: nil
     end
   end
 end
