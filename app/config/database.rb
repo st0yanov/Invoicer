@@ -3,7 +3,7 @@
 configure do
   # Log queries to STDOUT in development and use sqlite database.
   if settings.development? or settings.test?
-    set :database, { adapter: "sqlite3", database: "database.sqlite3" }
+    set :database, { adapter: "sqlite3", database: "db/database.sqlite3" }
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   else
     set :database, {

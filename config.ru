@@ -9,6 +9,7 @@ require 'sinatra/activerecord'
 require 'dotenv'
 
 require File.expand_path('../app/config/app', __FILE__)
+require File.expand_path('../app/config/database', __FILE__)
 require File.expand_path('../app/autoload', __FILE__)
 
 configure do
