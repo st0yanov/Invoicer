@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20160119125744) do
   create_table "users", force: :cascade do |t|
     t.string  "username", limit: 32
     t.string  "password"
-    t.boolean "active"
-    t.integer "level",    limit: 2
+    t.boolean "active",              default: false
+    t.integer "level",    limit: 2,  default: 0
     t.string  "last_ip",  limit: 15
   end
 

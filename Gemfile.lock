@@ -73,6 +73,7 @@ DEPENDENCIES
   activesupport
   bcrypt
   dotenv
+  i18n
   mysql2
   pry
   rake

@@ -7,6 +7,7 @@ gem 'dotenv'
 gem 'activesupport'
 gem 'sinatra-contrib'
 gem 'bcrypt'
+gem 'i18n'
 
 group :development, :test do
   gem 'rerun'
