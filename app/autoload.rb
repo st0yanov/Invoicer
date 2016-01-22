@@ -1,3 +1,5 @@
+require_relative 'routes/application_controller'
+
 # Let's autoload all models.
 models_dir = File.join(File.expand_path('../models', __FILE__), '*.rb')
 Dir[models_dir].each do |model|
