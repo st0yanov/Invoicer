@@ -1,18 +1,25 @@
 <!doctype html>
-<html>
+<html class="no-js">
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" />
+    	<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<title><%= yield_content :page_title %></title>
 
-		<link rel="stylesheet" href="/assets/css/foundation.css" />
-		<link rel="stylesheet" href="/assets/css/app.css" />
+		<link rel="stylesheet" href="<%= url('/assets/css/foundation.css') %>" />
+		<link rel="stylesheet" href="<%= url('/assets/css/app.css') %>" />
 	</head>
 
 	<body>
 		<div class="row">
 			<%= yield_content :page_content %>
 		</div>
+
+		<script src="<%= url('/assets/js/vendor/jquery.min.js') %>"></script>
+	    <script src="<%= url('/assets/js/vendor/what-input.min.js') %>"></script>
+	    <script src="<%= url('/assets/js/foundation.min.js') %>"></script>
+	    <script src="<%= url('/assets/js/app.js') %>"></script>
+		<%= yield_content :footer_assets %>
 	</body>
 </html>

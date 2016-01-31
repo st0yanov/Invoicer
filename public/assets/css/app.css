@@ -1,6 +1,6 @@
 .log-in-form {
 	border: 1px solid #cacaca;
-	padding: 16px !important;
+	padding: 1rem;
 	border-radius: 3px;
 	position: absolute;
 	top: 50%;
@@ -13,4 +13,17 @@
 	.log-in-form {
 		width: 90%;
 	}
+}
+
+p.result {
+	font-weight: bold;
+	text-align: center;
+}
+
+p.result.success {
+	color: #00ff00;
+}
+
+p.result.error {
+	color: #ff0000;
 }

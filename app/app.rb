@@ -31,7 +31,11 @@ class Invoicer < Sinatra::Base
   environment = Sinatra::Application.environment
   db = YAML.load_file('./app/config/database.yml')[environment.to_s]
 
+  ActiveRecord::Base.establish_connection(db)
+
   configure do
     set :database, db
   end
+
+  helpers AuthHelpers, I18nHelpers
 end

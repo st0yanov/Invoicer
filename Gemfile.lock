@@ -90,6 +90,7 @@ DEPENDENCIES
   i18n
   mysql2
   pry
+  rack-test
   rake
   rerun
   rspec

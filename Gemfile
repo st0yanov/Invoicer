@@ -13,7 +13,11 @@ group :development, :test do
   gem 'rerun'
   gem 'pry'
   gem 'sqlite3'
+end
+
+group :test do
   gem 'rspec'
+  gem 'rack-test'
 end
 
 group :production do

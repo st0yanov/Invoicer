@@ -1,0 +1,17 @@
+bg-BG:
+  login:
+    page_title: Вход в системата
+
+    form:
+      heading: Вход
+      username: Потребителско име
+      password: Парола
+      remember_me: Запомни ме!
+      submit: Вход
+
+    other:
+      forgotten_password: Забравена парола?
+
+    messages:
+      success: Вие се логнахте успешно!
+      error: Грешно потребителско име или парола.

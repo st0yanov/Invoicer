@@ -27,4 +27,8 @@ class User < ActiveRecord::Base
   def password=(new_password)
     write_attribute(:password, Password.create(new_password))
   end
+
+  def check_password(input_password)
+    Password.new(password) == input_password
+  end
 end
