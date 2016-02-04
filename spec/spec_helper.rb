@@ -32,3 +32,8 @@ RSpec.configure do |config|
 
   Kernel.srand config.seed
 end
+
+# Allows me to access session in tests.
+def session
+  last_request.env['rack.session']
+end

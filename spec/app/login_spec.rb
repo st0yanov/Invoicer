@@ -51,6 +51,29 @@ RSpec.describe AuthenticationController do
       it 'returns an appropriate success message' do
         expect(@json['message']).to eq I18n.t('login.messages.success')
       end
+
+      it 'has successfully authorized the user' do
+        expect(session['user'].nil?).to eq false
+      end
+
+      it 'redirects user to homepage if logged in' do
+        get '/login'
+      end
+    end
+  end
+
+  describe 'GET /logout' do
+    before(:all) do
+      post '/login', :username => 'admin', :password => 'admin123'
+    end
+
+    it 'check authorized' do
+      expect(session['user'].nil?).to eq false
+    end
+
+    it 'logs the user out' do
+      get '/logout'
+      expect(session['user'].nil?).to eq true
     end
   end
 end
