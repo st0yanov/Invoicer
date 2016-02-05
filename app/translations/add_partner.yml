@@ -1,0 +1,17 @@
+bg-BG:
+  add_partner:
+    page_title: Добави партньор
+    content_heading: Добави партньор
+
+    form:
+      first_name: Име
+      last_name: Фамилия
+      country: Държава
+      city: Град
+      postcode: Пощенски код
+      address: Адрес
+      phone_number: Телефон
+      company_name: Фирма
+      eik: ЕИК
+      vat_id: ДДС №
+      submit: Добави

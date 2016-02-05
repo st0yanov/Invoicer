@@ -1,7 +1,7 @@
 $(function() {
     var form = $('#loginForm');
     var formAction = form.attr('action');
-    var resultText = $('p.result');
+    var resultText = $('div.result');
 
     form.on('submit', function(e) {
         e.preventDefault();
@@ -19,9 +19,9 @@ $(function() {
             resultText.text(data['message']);
 
             if (data['success']) {
-                resultText.removeClass('error success').addClass('success');
+                resultText.removeClass('alert-success alert-danger').addClass('alert-success');
             } else {
-                resultText.removeClass('error success').addClass('error');
+                resultText.removeClass('alert-success alert-danger').addClass('alert-danger');
             }
 
             resultText.fadeIn();

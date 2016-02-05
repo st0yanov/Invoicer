@@ -1,28 +1,28 @@
 <% content_for :page_title do %><%= t('login.page_title') %><% end %>
 
+<% content_for :header_assets do %>
+	<link href="<%= url('/assets/css/custom/signin.css') %>" rel="stylesheet">
+<% end %>
+
 <% content_for :page_content do %>
-	<div class="medium-6 medium-centered large-4 large-centered columns">
-		<form id="loginForm" method="post">
-			<div class="log-in-form">
-				<h4 class="text-center"><%= t('login.form.heading') %></h4>
-				<label><%= t('login.form.username') %>:
-					<input type="text" name="username" placeholder="">
-				</label>
+	<div class="container">
+		<form class="form-signin" id="loginForm" method="post">
+			<h2 class="form-signin-heading"><%= t('login.form.heading') %></h2>
 
-				<label><%= t('login.form.password') %>:
-					<input type="password" name="password">
-				</label>
+			<label for="username" class="sr-only"><%= t('login.form.username') %></label>
+			<input type="text" id="username" name="username" class="form-control" required autofocus>
 
-				<input id="remember-me" type="checkbox"><label for="remember-me"><%= t('login.form.remember_me') %></label>
+			<label for="password" class="sr-only"><%= t('login.form.password') %></label>
+			<input type="password" id="password" name="password" class="form-control" required>
 
-				<p><input type="submit" class="button expanded" value="<%= t('login.form.submit') %>"></p>
-
-				<p class="text-center"><a href="#"><%= t('login.other.forgotten_password') %></a></p>
-
-				<p class="result" style="display: none;"></p>
+			<div class="checkbox">
+				<label><input type="checkbox" name="remember" value="1"> <%= t('login.form.remember_me') %></label>
 			</div>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><%= t('login.form.submit') %></button>
 		</form>
-	</div>
+		<div class="result alert" role="alert" style="display: none;"></div>
+    </div> <!-- /container -->
 <% end %>
 
 <% content_for :footer_assets do %>

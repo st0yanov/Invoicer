@@ -4,23 +4,27 @@ require 'sinatra/json'
 class PartnersController < ApplicationController
   helpers Sinatra::ContentFor
 
-  get '/partner/add' do
+  before do
+    redirect '/auth/login' unless authorized?
+  end
+
+  get '/add' do
+    erb :add_partner, :layout => :admin_layout
+  end
+
+  post '/add' do
 
   end
 
-  post '/partner/add' do
+  get '/edit' do
 
   end
 
-  get '/partner/edit' do
+  post '/edit' do
 
   end
 
-  post '/partner/edit' do
-
-  end
-
-  delete '/partner/delete' do
+  delete '/delete' do
 
   end
 

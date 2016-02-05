@@ -1,0 +1,64 @@
+<% content_for :page_title do %>
+    <%= t('add_partner.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header"><%= t('add_partner.content_heading') %></h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="first_name"><%= t('add_partner.form.first_name') %></label>
+            <input type="text" class="form-control" id="first_name" name="first_name">
+        </div>
+
+        <div class="form-group">
+            <label for="last_name"><%= t('add_partner.form.last_name') %></label>
+            <input type="text" class="form-control" id="last_name" name="last_name">
+        </div>
+
+        <div class="form-group">
+            <label for="country"><%= t('add_partner.form.country') %></label>
+            <select class="form-control" id="country" name="country">
+            	<option value="BG"><%= t('countries.BG') %></option>
+            	<option value="DE"><%= t('countries.DE') %></option>
+            	<option value="UK"><%= t('countries.UK') %></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="city"><%= t('add_partner.form.city') %></label>
+            <input type="text" class="form-control" id="city" name="city">
+        </div>
+
+        <div class="form-group">
+            <label for="postcode"><%= t('add_partner.form.postcode') %></label>
+            <input type="number" class="form-control" id="postcode" name="postcode">
+        </div>
+
+        <div class="form-group">
+            <label for="address"><%= t('add_partner.form.address') %></label>
+            <input type="text" class="form-control" id="address" name="address">
+        </div>
+
+        <div class="form-group">
+            <label for="phone_number"><%= t('add_partner.form.phone_number') %></label>
+            <input type="tel" class="form-control" id="phone_number" name="phone_number">
+        </div>
+
+        <div class="form-group">
+            <label for="company_name"><%= t('add_partner.form.company_name') %></label>
+            <input type="text" class="form-control" id="company_name" name="company_name">
+        </div>
+
+        <div class="form-group">
+            <label for="eik"><%= t('add_partner.form.eik') %></label>
+            <input type="text" class="form-control" id="eik" name="eik">
+        </div>
+
+        <div class="form-group">
+            <label for="vat_id"><%= t('add_partner.form.vat_id') %></label>
+            <input type="text" class="form-control" id="vat_id" name="vat_id">
+        </div>
+
+        <button type="submit" class="btn btn-default"><%= t('add_partner.form.submit') %></button>
+    </form>
+<% end %>
