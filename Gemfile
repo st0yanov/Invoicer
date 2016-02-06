@@ -8,6 +8,8 @@ gem 'activesupport'
 gem 'sinatra-contrib'
 gem 'bcrypt'
 gem 'i18n'
+gem 'eik_validator'
+gem 'valvat'
 
 group :development, :test do
   gem 'rerun'
