@@ -53,7 +53,17 @@ class PartnersController < ApplicationController
   end
 
   delete '/delete/:id' do |id|
+    partner = Partner.find_by(id: id)
 
+    if partner
+      if partner.destroy
+        json :success => true, :message => t('delete_partner.messages.success')
+      else
+        json :success => false, :message => t('delete_partner.messages.error')
+      end
+    else
+      json :success => false, :message => t('delete_partner.messages.not_found')
+    end
   end
 
 end
