@@ -8,6 +8,11 @@ class PartnersController < ApplicationController
     redirect '/auth/login' unless authorized?
   end
 
+  get '/' do
+    partners = Partner.all.order(id: :desc)
+    erb :partners, :layout => :admin_layout, :locals => { partners: partners }
+  end
+
   get '/add' do
     erb :add_partner, :layout => :admin_layout
   end
@@ -28,7 +33,7 @@ class PartnersController < ApplicationController
     partner = Partner.find_by(id: id)
 
     if partner
-      erb :edit_partner, :layout => :admin_layout, :locals => { :partner => partner }
+      erb :edit_partner, :layout => :admin_layout, :locals => { partner: partner }
     else
       halt 404, t('edit_partner.messages.not_found')
     end

@@ -1,0 +1,18 @@
+bg-BG:
+  partners:
+    page_title: Партньори
+    content_heading: Партньори
+
+    table:
+      first_name: Име
+      last_name: Фамилия
+      company_name: Фирма
+      eik: ЕИК
+      vat_id: ДДС №
+      actions:
+        label: Действия
+        edit: Редактирай
+        delete: Изтрий
+
+    no_partners: В момента няма добавени партньори.
+    add_partner: Добави партньор

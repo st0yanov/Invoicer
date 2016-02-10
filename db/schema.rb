@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 20160204170910) do
     t.string  "last_name",    limit: 32
     t.string  "country",      limit: 32
     t.string  "city",         limit: 32
+    t.integer "postcode"
     t.string  "address",      limit: 64
     t.string  "phone_number", limit: 16
     t.string  "company_name", limit: 32
-    t.integer "postcode"
     t.integer "eik"
-    t.integer "vat_id"
+    t.string  "vat_id"
   end
 
   create_table "users", force: :cascade do |t|
