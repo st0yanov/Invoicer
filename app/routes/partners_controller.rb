@@ -13,7 +13,15 @@ class PartnersController < ApplicationController
   end
 
   post '/add' do
+    partner = Partner.create(params[:partner])
 
+    if partner.valid?
+      json :success => true, :message => t('add_partner.messages.success')
+    else
+      json :success => false,
+           :message => t('add_partner.messages.error'),
+           :errors => partner.errors.messages
+    end
   end
 
   get '/edit' do

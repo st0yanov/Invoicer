@@ -1,9 +1,13 @@
+require 'active_model'
+#require 'eik_validator'
+require 'valvat'
+
 class Partner < ActiveRecord::Base
   validates :first_name, :last_name, :country, :city, :address, :phone_number, presence: {
     message: I18n.t('validation.presence')
   }
 
-  validates :first_name, :last_name, :city, :company_name, length: {
+  validates :first_name, :last_name, :city, length: {
     in: 2..32,
     too_short: I18n.t('validation.length.too_short'),
     too_long: I18n.t('validation.length.too_long')
@@ -16,7 +20,7 @@ class Partner < ActiveRecord::Base
 
   validates :postcode, numericality: {
     only_integer: true,
-    message: I18n.t('validation.numericality')
+    message: I18n.t('validation.postcode.numericality')
   }
 
   validates :address, length: {
@@ -29,14 +33,21 @@ class Partner < ActiveRecord::Base
     too_long: I18n.t('validation.length.too_long')
   }
 
+  validates :company_name, length: {
+    in: 2..32,
+    too_short: I18n.t('validation.length.too_short'),
+    too_long: I18n.t('validation.length.too_long')
+  }, if: Proc.new { |a| a.company_name.present? }
+
   validates :company_name, uniqueness: {
     case_sensitive: false,
     message: I18n.t('validation.company_name.uniqueness')
   }, if: Proc.new { |a| a.company_name.present? }
 
-  validates :eik, eik: {
-    message: I18n.t('validation.eik')
-  }, if: Proc.new { |a| a.eik.present? }
+  #TODO - Fix the eik_validation gem.
+  #validates :eik, eik: {
+  #  message: I18n.t('validation.eik')
+  #}, if: Proc.new { |a| a.eik.present? }
 
   validates :vat_id, valvat: {
     lookup: true,
