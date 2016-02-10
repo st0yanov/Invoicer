@@ -24,15 +24,35 @@ class PartnersController < ApplicationController
     end
   end
 
-  get '/edit' do
+  get '/edit/:id' do |id|
+    partner = Partner.find_by(id: id)
 
+    if partner
+      erb :edit_partner, :layout => :admin_layout, :locals => { :partner => partner }
+    else
+      halt 404, t('edit_partner.messages.not_found')
+    end
   end
 
-  post '/edit' do
+  post '/edit/:id' do |id|
+    partner = Partner.find_by(id: id)
 
+    if partner
+      partner.attributes = params[:partner]
+
+      if partner.save
+        json :success => true, :message => t('edit_partner.messages.success')
+      else
+        json :success => false,
+             :message => t('add_partner.messages.error'),
+             :errors => partner.errors.messages
+      end
+    else
+      json :success => false, :message => t('edit_partner.messages.not_found')
+    end
   end
 
-  delete '/delete' do
+  delete '/delete/:id' do |id|
 
   end
 
