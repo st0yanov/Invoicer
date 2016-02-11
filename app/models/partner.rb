@@ -3,6 +3,8 @@ require 'active_model'
 require 'valvat'
 
 class Partner < ActiveRecord::Base
+  has_many :invoices
+
   validates :first_name, :last_name, :country, :city, :address, :phone_number, presence: {
     message: I18n.t('validation.presence')
   }

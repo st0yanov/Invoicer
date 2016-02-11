@@ -49,7 +49,7 @@ class PartnersController < ApplicationController
         json :success => true, :message => t('edit_partner.messages.success')
       else
         json :success => false,
-             :message => t('add_partner.messages.error'),
+             :message => t('edit_partner.messages.error'),
              :errors => partner.errors.messages
       end
     else

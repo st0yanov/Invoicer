@@ -1,0 +1,12 @@
+bg-BG:
+  add_invoice:
+    page_title: Добави фактура
+    content_heading: Добави фактура
+
+    form:
+      
+      submit: Добави
+
+    messages:
+      success: Успешно добавихте нова фактура.
+      error: Възникна грешка при добавянето на нова фактура.

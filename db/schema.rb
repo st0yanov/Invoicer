@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204170910) do
+ActiveRecord::Schema.define(version: 20160211102336) do
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "partner_id"
+    t.integer  "type",       limit: 1,  default: 0
+    t.string   "number",     limit: 32,                 null: false
+    t.text     "items",                                 null: false
+    t.decimal  "total"
+    t.boolean  "paid",                  default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "invoices", ["partner_id"], name: "index_invoices_on_partner_id"
 
   create_table "partners", force: :cascade do |t|
     t.string  "first_name",   limit: 32
