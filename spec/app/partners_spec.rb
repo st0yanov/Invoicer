@@ -158,4 +158,81 @@ RSpec.describe PartnersController do
     end
   end
 
+  describe 'POST /edit/:id' do
+    context 'unexisting partner' do
+      before(:all) do
+        post '/edit/999999999'
+        @json = JSON.parse(last_response.body)
+      end
+
+      it 'returns an error response' do
+        expect(@json['success']).to be false
+      end
+
+      it 'returns an appropirate error message' do
+        expect(@json['message']).to include I18n.t('edit_partner.messages.not_found')
+      end
+    end
+
+    context 'existing partner' do
+      context 'invalid data' do
+        before(:all) do
+          post '/edit/'+Partner.first.id.to_s, { partner: { first_name: '' } }
+          @json = JSON.parse(last_response.body)
+        end
+
+        it 'doesn\'t update a partner with invalid data' do
+          expect(@json['success']).to be false
+        end
+      end
+
+      context 'valid data' do
+        before(:all) do
+          post '/edit/'+Partner.first.id.to_s, { partner: { first_name: 'Veselin' } }
+          @json = JSON.parse(last_response.body)
+        end
+
+        it 'updates a partner with valid data' do
+          expect(@json['success']).to be true
+        end
+
+        it 'returns an appropirate success message' do
+          expect(@json['message']).to include I18n.t('edit_partner.messages.success')
+        end
+      end
+    end
+  end
+
+  describe 'DELETE /delete/:id' do
+    context 'unexisting partner' do
+      before(:all) do
+        delete '/delete/999999999'
+        @json = JSON.parse(last_response.body)
+      end
+
+      it 'returns an error response' do
+        expect(@json['success']).to be false
+      end
+
+      it 'returns an appropirate error message' do
+        expect(@json['message']).to include I18n.t('delete_partner.messages.not_found')
+      end
+    end
+
+    context 'existing partner' do
+      before(:all) do
+        delete '/delete/'+Partner.first.id.to_s
+        @json = JSON.parse(last_response.body)
+      end
+
+      it 'deletes a partner' do
+        expect(@json['success']).to be true
+      end
+
+      it 'returns an appropirate success message' do
+        expect(@json['message']).to include I18n.t('delete_partner.messages.success')
+      end
+    end
+  end
+
 end

@@ -55,7 +55,7 @@ class Partner < ActiveRecord::Base
   }, if: Proc.new { |a| a.eik.present? }
 
   validates :vat_id, valvat: {
-    lookup: true,
+    lookup: false,
     message: I18n.t('validation.vat_id.validity')
   }, if: Proc.new { |a| a.vat_id.present? }
 
