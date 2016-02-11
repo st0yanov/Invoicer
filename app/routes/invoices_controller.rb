@@ -14,7 +14,8 @@ class InvoicesController < ApplicationController
   end
 
   get '/add' do
-    erb :add_invoice, :layout => :admin_layout
+    partners = Partner.all.order(id: :desc)
+    erb :add_invoice, :layout => :admin_layout, :locals => { partners: partners }
   end
 
   post '/add' do

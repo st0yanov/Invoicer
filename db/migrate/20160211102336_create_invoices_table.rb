@@ -7,6 +7,7 @@ class CreateInvoicesTable < ActiveRecord::Migration
       t.text :items, null: false
       t.decimal :total
       t.boolean :paid, default: false
+      t.date :deal_date, null: false
       t.timestamps null: false
     end
   end
