@@ -46,11 +46,21 @@ class Partner < ActiveRecord::Base
 
   #TODO - Fix the eik_validation gem.
   #validates :eik, eik: {
-  #  message: I18n.t('validation.eik')
+  #  message: I18n.t('validation.eik.validity')
   #}, if: Proc.new { |a| a.eik.present? }
+
+  validates :eik, uniqueness: {
+    case_sensitive: false,
+    message: I18n.t('validation.eik.uniqueness')
+  }, if: Proc.new { |a| a.eik.present? }
 
   validates :vat_id, valvat: {
     lookup: true,
-    message: I18n.t('validation.vat_id')
+    message: I18n.t('validation.vat_id.validity')
+  }, if: Proc.new { |a| a.vat_id.present? }
+
+  validates :vat_id, uniqueness: {
+    case_sensitive: false,
+    message: I18n.t('validation.vat_id.uniqueness')
   }, if: Proc.new { |a| a.vat_id.present? }
 end

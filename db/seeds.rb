@@ -7,3 +7,5 @@ users = [
 users.each do |username, password, active, level|
   User.create(username: username, password: password, active: active, level: level)
 end
+
+puts 'Done.'

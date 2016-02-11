@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   }
 
   validates :password, length: {
-    in: 5..32,
+    in: 5..64,
     too_short: I18n.t('validation.password.too_short'),
     too_long: I18n.t('validation.password.too_long')
   }

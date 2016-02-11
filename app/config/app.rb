@@ -35,7 +35,7 @@ class Invoicer
     # - false = Disabled
     set :sessions, true
 
-    set :session_secret, ENV['SESSION_SECRET'] or 'supersecret'
+    set :session_secret, ENV['SESSION_SECRET'].nil? ? 'supersecret' : ENV['SESSION_SECRET']
 
   end
 
