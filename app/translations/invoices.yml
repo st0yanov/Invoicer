@@ -3,6 +3,8 @@ bg-BG:
     page_title: Фактури
     content_heading: Фактури
 
+    proforma: Проформа
+
     table:
       number: Номер
       partner: Партньор

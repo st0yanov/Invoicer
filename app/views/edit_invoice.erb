@@ -48,9 +48,9 @@
                         <tr>
                             <td><textarea rows="1" class="form-control" name="invoice[items][description][<%= i %>]"><%= item.description %></textarea></td>
                             <td><input type="text" class="form-control" name="invoice[items][unit][<%= i %>]" value="<%= item.unit %>"></td>
-                            <td><input type="number" min="0.00" step="0.50" class="form-control" name="invoice[items][quantity][<%= i %>]" value="<%= item.quantity %>"></td>
-                            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][unit_price][<%= i %>]" value="<%= item.unit_price %>"></td>
-                            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][discount][<%= i %>]" value="<%= item.discount %>"></td>
+                            <td><input type="number" min="0.00" step="0.01" class="form-control" name="invoice[items][quantity][<%= i %>]" value="<%= item.quantity %>"></td>
+                            <td><input type="number" min="0.00" step="0.01" class="form-control" name="invoice[items][unit_price][<%= i %>]" value="<%= item.unit_price %>"></td>
+                            <td><input type="number" min="0.00" step="0.01" class="form-control" name="invoice[items][discount][<%= i %>]" value="<%= item.discount %>"></td>
                             <td><a class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-trash"></span></a></td>
                         </tr>
                         <% i += 1 %>
@@ -68,9 +68,9 @@
         <tr class="sample_item">
             <td><textarea rows="1" class="form-control" name="invoice[items][description][{i}]"></textarea></td>
             <td><input type="text" class="form-control" name="invoice[items][unit][{i}]"></td>
-            <td><input type="number" min="0.00" step="0.50" class="form-control" name="invoice[items][quantity][{i}]"></td>
-            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][unit_price][{i}]"></td>
-            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][discount][{i}]"></td>
+            <td><input type="number" min="0.00" step="0.01" class="form-control" name="invoice[items][quantity][{i}]"></td>
+            <td><input type="number" min="0.00" step="0.01" class="form-control" name="invoice[items][unit_price][{i}]"></td>
+            <td><input type="number" min="0.00" step="0.01" class="form-control" name="invoice[items][discount][{i}]"></td>
             <td><a class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-trash"></span></a></td>
         </tr>
 

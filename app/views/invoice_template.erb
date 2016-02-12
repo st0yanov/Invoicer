@@ -114,7 +114,7 @@
 							<%= @invoice.partner.city %> <%= @invoice.partner.postcode %>,<br>
 							<%= @invoice.partner.address %>,<br>
 							<%= t("countries.#{@invoice.partner.country}") %><br>
-							<strong>ЕИК:</strong> <%= @invoice.partner.eik.empty? ? '-' : @invoice.partner.eik %>
+							<strong>ЕИК:</strong> <%= @invoice.partner.eik.nil? ? '-' : @invoice.partner.eik %><br>
 							<strong>ЗДДС №:</strong> <%= @invoice.partner.vat_id.empty? ? '-' : @invoice.partner.vat_id %>
 						</p>
 					<% end %>

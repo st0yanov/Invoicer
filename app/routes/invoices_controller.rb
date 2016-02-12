@@ -3,7 +3,7 @@ require 'sinatra/json'
 require 'pdfkit'
 
 class InvoicesController < ApplicationController
-  helpers Sinatra::ContentFor, InvoiceHelpers
+  helpers Sinatra::ContentFor, InvoiceHelpers, SettingsHelpers
 
   before do
     redirect '/auth/login' unless authorized?
@@ -22,12 +22,13 @@ class InvoicesController < ApplicationController
   post '/add' do
     invoice = Invoice.new
     invoice.partner = Partner.find_by(id: params[:invoice][:partner])
-    invoice.number = '1000000001'
+    invoice.number = get_setting('proforma_number')
     invoice.items = params[:invoice][:items].to_json
     invoice.total = calculate_total(format_items(params[:invoice][:items]))
     invoice.deal_date = params[:invoice][:deal_date]
 
     if invoice.save
+      set_setting('proforma_number', invoice.number.to_i + 1)
       json :success => true, :message => t('add_invoice.messages.success')
     else
       json :success => false,

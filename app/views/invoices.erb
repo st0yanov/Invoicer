@@ -23,13 +23,13 @@
             <tbody>
                 <% invoices.each do |invoice| %>
                     <tr>
-                        <td><%= invoice.number %></td>
+                        <td><%= "#{t('invoices.proforma')}-" if invoice.document_type == 0 %><%= invoice.number %></td>
                         <td>
                             <% if invoice.partner.company_name.empty? %>
                                 <%= "#{invoice.partner.first_name} #{invoice.partner.last_name}" %>
                             <% else %>
                                 <%= "#{invoice.partner.company_name}" %>
-                                <%= "<br>#{invoice.partner.eik}" unless invoice.partner.eik.empty? %>
+                                <%= "<br>#{invoice.partner.eik}" unless invoice.partner.eik.nil? %>
                             <% end %>
                         </td>
                         <td><%= '%.2f' % invoice.total.to_s %> <%= t('invoices.currencies.bgn') %></td>

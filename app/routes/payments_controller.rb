@@ -2,7 +2,7 @@ require 'sinatra/content_for'
 require 'sinatra/json'
 
 class PaymentsController < ApplicationController
-  helpers Sinatra::ContentFor, InvoiceHelpers
+  helpers Sinatra::ContentFor, InvoiceHelpers, SettingsHelpers
 
   before do
     redirect '/auth/login' unless authorized?
@@ -89,8 +89,27 @@ class PaymentsController < ApplicationController
 
   private
   def mark_paid(invoice)
+    was_paid = invoice.paid
     invoice.paid = calculate_payments(invoice) >= vat_price(invoice)
+    if invoice.paid
+      invoice.document_type = 1
+      invoice.number = get_setting('invoice_number')
+    else
+      if was_paid
+        invoice.document_type = 0
+        invoice.number = get_setting('proforma_number')
+      end
+    end
+
     invoice.save!
+
+    if invoice.paid
+      set_setting('invoice_number', invoice.number.to_i + 1)
+    else
+      if was_paid
+        set_setting('proforma_number', invoice.number.to_i + 1)
+      end
+    end
   end
 
 end
