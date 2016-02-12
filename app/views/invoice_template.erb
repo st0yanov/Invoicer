@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {
+			font-family: Arial;
+			font-size: 12px;
+		}
+
+		.invoiceContainer {
+			width: 650px;
+			height: auto;
+			border: 1px solid #000000;
+			padding: 15px;
+			margin: 0 auto;
+		}
+
+		.left {
+			float: left;
+		}
+
+		.right {
+			float: right;
+		}
+
+		.clearfix {
+			clear: both;
+		}
+
+		h1, h2, h3 {
+			text-transform: uppercase;
+			margin: 0;
+		}
+
+		.original {
+			color: #999999;
+		}
+
+		.top-space {
+			padding-top: 15px;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+		.text-right {
+			text-align: right;
+		}
+
+		.bold {
+			font-weight: bold;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			empty-cells: hide;
+		}
+
+		table, th, td {
+			border: 1px solid #000000;
+			text-align: center;
+		}
+
+		table th, td {
+			padding: 10px;
+		}
+	</style>
+</head>
+<body>
+<div class="invoiceContainer">
+	<div>
+		<div class="left">
+			<h1><%= @invoice.document_type == 0 ? t('download_invoice.proforma') : t('download_invoice.invoice') %>:</h1>
+			<h2>№ <%= @invoice.number %></h2>
+		</div>
+
+		<div class="right">
+			<h2 class="original"><%= t('download_invoice.original') %></h2>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+	<div class="top-space">
+		<div class="left">
+			<span><%= t('download_invoice.issue_date') %>: <strong><%= @invoice.created_at.strftime('%d.%m.%Y') %></strong></span>
+		</div>
+
+		<div class="right">
+			<span><%= t('download_invoice.deal_date') %>: <strong><%= @invoice.deal_date.strftime('%d.%m.%Y') %></strong></span>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+	<div class="top-space">
+		<table cellpadding="0" cellspacing="0" border="1">
+			<tr>
+				<td class="center" width="50%"><h3><%= t('download_invoice.recipient') %></h3></td>
+				<td class="center" width="50%"><h3><%= t('download_invoice.provider') %></h3></td>
+			</tr>
+			<tr>
+				<td>
+					<% if @invoice.partner.company_name.empty? %>
+						<p>
+							<strong><%= @invoice.partner.first_name %> <%= @invoice.partner.last_name %></strong><br>
+							<%= @invoice.partner.city %> <%= @invoice.partner.postcode %>,<br>
+							<%= @invoice.partner.address %>,<br>
+							<%= t("countries.#{@invoice.partner.country}") %>
+						</p>
+					<% else %>
+						<p>
+							<strong><%= @invoice.partner.company_name %></strong><br>
+							<%= @invoice.partner.city %> <%= @invoice.partner.postcode %>,<br>
+							<%= @invoice.partner.address %>,<br>
+							<%= t("countries.#{@invoice.partner.country}") %><br>
+							<strong>ЕИК:</strong> <%= @invoice.partner.eik.empty? ? '-' : @invoice.partner.eik %>
+							<strong>ЗДДС №:</strong> <%= @invoice.partner.vat_id.empty? ? '-' : @invoice.partner.vat_id %>
+						</p>
+					<% end %>
+				</td>
+				<td>
+					<p>
+						<strong>"ТЕСТОВА ФИРМА" ЕООД</strong><br>
+						София 1000,<br>
+						Студентски град, бл. 55, вх. "Б",<br>
+						България<br>
+						<strong>ЕИК:</strong> 111111111<br>
+						<strong>ЗДДС №:</strong> BG111111111<br>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="top-space">
+		<table cellpadding="0" cellspacing="0" border="1">
+			<thead>
+				<tr>
+					<th colspan="9"><h3><%= t('download_invoice.services') %></h3></th>
+				</tr>
+				<tr>
+					<th width="5%">#</th>
+					<th width="50%"><%= t('download_invoice.table.description') %></th>
+					<th width="10%"><%= t('download_invoice.table.unit') %></th>
+					<th width="5%"><%= t('download_invoice.table.quantity') %></th>
+					<th width="5%"><%= t('download_invoice.table.unit_price') %></th>
+					<th width="5%"><%= t('download_invoice.table.discount') %></th>
+					<th width="5%"><%= t('download_invoice.table.value') %></th>
+					<th width="5%"><%= t('download_invoice.table.vat') %></th>
+					<th width="10%"><%= t('download_invoice.table.total') %></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% i, total_vat, total = 1, 0, 0 %>
+                <% invoice_items = format_items(JSON.parse(@invoice.items)) %>
+                <% invoice_items.each do |item| %>
+                <% value = (item.quantity.to_d * item.unit_price.to_d) - item.discount.to_d %>
+                <% vat = value * 0.2 %>
+                <% total_vat += vat %>
+                <% total += value+vat %>
+				<tr>
+					<td><%= i %></td>
+					<td><%= item.description %></td>
+					<td><%= item.unit %></td>
+					<td><%= item.quantity %></td>
+					<td><%= '%.2f' % item.unit_price.to_s %></td>
+					<td><%= '%.2f' % item.discount.to_s %></td>
+					<td><%= '%.2f' % value.to_s %></td>
+					<td><%= '%.2f' % vat.to_s %></td>
+					<td><%= '%.2f' % (value+vat).to_s %></td>
+				</tr>
+				<% i += 1 %>
+				<% end %>
+			</tbody>
+
+			<tfoot>
+				<tr>
+					<td colspan="6"></td>
+					<td class="bold" style="border: none;"><%= t('download_invoice.table.total') %></td>
+					<td><%= '%.2f' % total_vat.to_s %></td>
+					<td><%= '%.2f' % total.to_s %></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="top-space">
+		<table cellpadding="0" cellspacing="0" border="1">
+			<thead>
+				<tr>
+					<th colspan="4"><h3><%= t('download_invoice.payments.label') %></h3></th>
+				</tr>
+				<tr>
+					<th><%= t('download_invoice.payments.table.type') %></th>
+					<th><%= t('download_invoice.payments.table.date') %></th>
+					<th><%= t('download_invoice.payments.table.transaction') %></th>
+					<th><%= t('download_invoice.payments.table.value') %></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

@@ -81,4 +81,17 @@ class InvoicesController < ApplicationController
     end
   end
 
+  get '/download/:id' do |id|
+    @invoice = Invoice.find_by(id: id)
+
+    case params[:format]
+    when 'html'
+      erb :invoice_template, :layout => false
+    when 'pdf'
+
+    else
+      halt 404, t('download_invoice.messages.invalid_format')
+    end
+  end
+
 end

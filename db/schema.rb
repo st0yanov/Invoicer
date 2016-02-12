@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211102336) do
+ActiveRecord::Schema.define(version: 20160212125004) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "partner_id"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20160211102336) do
     t.integer "eik"
     t.string  "vat_id"
   end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "invoice_id"
+    t.string  "gateway",     null: false
+    t.date    "date",        null: false
+    t.string  "transaction", null: false
+    t.decimal "value",       null: false
+  end
+
+  add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id"
 
   create_table "users", force: :cascade do |t|
     t.string  "username", limit: 32

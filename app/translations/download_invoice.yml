@@ -1,0 +1,34 @@
+bg-BG:
+  download_invoice:
+    proforma: Проформа-фактура
+    invoice: Фактура
+    original: Оригинал
+
+    issue_date: Дата на издаване
+    deal_date: Дата на данъчно събитие
+
+    recipient: Получател
+    provider: Доставчик
+
+    services: Продукти и услуги
+
+    table:
+      description: Описание
+      unit: Мярка
+      quantity: К-во
+      unit_price: Ед. цена
+      discount: Отс.
+      value: С-ст
+      vat: ДДС
+      total: Общо
+
+    payments:
+      label: Плащания
+      table:
+        type: Начин на плащане
+        date: Дата
+        transaction: Транзакция
+        value: Стойност
+
+    messages:
+      invalid_format: Невалиден изходен формат.
