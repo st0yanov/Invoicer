@@ -40,6 +40,7 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                             <% end %>
                         </td>
+                        <td><%= invoice.created_at.strftime('%F') %></td>
                         <td>
                             <form class="deleteInvoice" method="delete" action="<%= url('/delete/'+invoice.id.to_s) %>">
                                 <a href="<%= url('/edit/'+invoice.id.to_s) %>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -56,5 +57,5 @@
 <% end %>
 
 <% content_for :footer_assets do %>
-    <script type="text/javascript" src="<%= url('/assets/js/custom/incoices.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/assets/js/custom/invoices.js') %>"></script>
 <% end %>

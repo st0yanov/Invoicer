@@ -1,0 +1,92 @@
+<% content_for :page_title do %>
+    <%= t('edit_invoice.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header"><%= t('edit_invoice.content_heading') %></h1>
+    <form id="addInvoiceForm" method="post">
+        <div class="form-group">
+            <label class="control-label" for="partner"><%= t('edit_invoice.form.partner') %></label>
+            <select class="form-control" id="partner" name="invoice[partner]">
+                <% partners.each do |partner| %>
+                    <option value="<%= partner.id %>" <%= if invoice.partner == partner then "selected" end %>>
+                        <% if partner.company_name.empty? %>
+                            <%= "#{partner.first_name} #{partner.last_name}" %>
+                        <% else %>
+                            <%= "#{partner.company_name}" %>
+                        <% end %>
+                    </option>
+                <% end %>
+            </select>
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="deal_date"><%= t('edit_invoice.form.deal_date') %></label>
+            <input type="date" class="form-control" id="deal_date" name="invoice[deal_date]" value="<%= invoice.deal_date %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label"><%= t('edit_invoice.form.products_services') %></label>
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <td width="50%"><%= t('edit_invoice.form.table.description') %></td>
+                        <td width="10%"><%= t('edit_invoice.form.table.unit') %></td>
+                        <td width="10%"><%= t('edit_invoice.form.table.quantity') %></td>
+                        <td width="10%"><%= t('edit_invoice.form.table.unit_price') %></td>
+                        <td width="10%"><%= t('edit_invoice.form.table.discount') %></td>
+                        <td width="10%"><%= t('edit_invoice.form.table.actions') %></td>
+                    </tr>
+                </thead>
+
+                <tbody id="invoiceItems">
+                    <% i = 1 %>
+                    <% invoice_items = format_items(JSON.parse(invoice.items)) %>
+                    <% invoice_items.each do |item| %>
+                        <tr>
+                            <td><textarea rows="1" class="form-control" name="invoice[items][description][<%= i %>]"><%= item.description %></textarea></td>
+                            <td><input type="text" class="form-control" name="invoice[items][unit][<%= i %>]" value="<%= item.unit %>"></td>
+                            <td><input type="number" min="0.00" step="0.50" class="form-control" name="invoice[items][quantity][<%= i %>]" value="<%= item.quantity %>"></td>
+                            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][unit_price][<%= i %>]" value="<%= item.unit_price %>"></td>
+                            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][discount][<%= i %>]" value="<%= item.discount %>"></td>
+                            <td><a class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-trash"></span></a></td>
+                        </tr>
+                        <% i += 1 %>
+                    <% end %>
+                </tbody>
+            </table>
+
+        </div>
+
+        <button id="addItem" class="btn btn-default"><%= t('edit_invoice.form.add_item') %></button>
+        <button type="submit" class="btn btn-primary"><%= t('edit_invoice.form.submit') %></button>
+    </form>
+
+    <table id="samples" style="display: none;">
+        <tr class="sample_item">
+            <td><textarea rows="1" class="form-control" name="invoice[items][description][{i}]"></textarea></td>
+            <td><input type="text" class="form-control" name="invoice[items][unit][{i}]"></td>
+            <td><input type="number" min="0.00" step="0.50" class="form-control" name="invoice[items][quantity][{i}]"></td>
+            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][unit_price][{i}]"></td>
+            <td><input type="number" min="0.00" step="0.10" class="form-control" name="invoice[items][discount][{i}]"></td>
+            <td><a class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-trash"></span></a></td>
+        </tr>
+
+        <input type="hidden" id="item_counter" value="<%= invoice_items.length %>">
+    </table>
+
+    <div class="result alert" role="alert" style="display: none;"></div>
+<% end %>
+
+<% content_for :footer_assets do %>
+    <% invoice_items = format_items(JSON.parse(invoice.items)) %>
+
+    <script type="text/javascript" src="<%= url('/assets/js/custom/edit_invoice.js') %>"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#item_counter').val('<%= invoice_items.length %>');
+        });
+    </script>
+<% end %>

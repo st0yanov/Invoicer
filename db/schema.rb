@@ -15,13 +15,14 @@ ActiveRecord::Schema.define(version: 20160211102336) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "partner_id"
-    t.integer  "type",       limit: 1,  default: 0
-    t.string   "number",     limit: 32,                 null: false
-    t.text     "items",                                 null: false
+    t.integer  "document_type", limit: 1,  default: 0
+    t.string   "number",        limit: 32,                 null: false
+    t.text     "items",                                    null: false
     t.decimal  "total"
-    t.boolean  "paid",                  default: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.boolean  "paid",                     default: false
+    t.date     "deal_date",                                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "invoices", ["partner_id"], name: "index_invoices_on_partner_id"

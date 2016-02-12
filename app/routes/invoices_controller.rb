@@ -2,7 +2,7 @@ require 'sinatra/content_for'
 require 'sinatra/json'
 
 class InvoicesController < ApplicationController
-  helpers Sinatra::ContentFor
+  helpers Sinatra::ContentFor, InvoiceHelpers
 
   before do
     redirect '/auth/login' unless authorized?
@@ -19,9 +19,14 @@ class InvoicesController < ApplicationController
   end
 
   post '/add' do
-    invoice = Invoice.create(params[:invoice])
+    invoice = Invoice.new
+    invoice.partner = Partner.find_by(id: params[:invoice][:partner])
+    invoice.number = '1000000001'
+    invoice.items = params[:invoice][:items].to_json
+    invoice.total = calculate_total(format_items(params[:invoice][:items]))
+    invoice.deal_date = params[:invoice][:deal_date]
 
-    if invoice.valid?
+    if invoice.save
       json :success => true, :message => t('add_invoice.messages.success')
     else
       json :success => false,
@@ -32,9 +37,10 @@ class InvoicesController < ApplicationController
 
   get '/edit/:id' do |id|
     invoice = Invoice.find_by(id: id)
+    partners = Partner.all.order(id: :desc)
 
     if invoice
-      erb :edit_invoice, :layout => :admin_layout, :locals => { invoice: invoice }
+      erb :edit_invoice, :layout => :admin_layout, :locals => { invoice: invoice, partners: partners }
     else
       halt 404, t('edit_invoice.messages.not_found')
     end
@@ -44,7 +50,10 @@ class InvoicesController < ApplicationController
     invoice = Invoice.find_by(id: id)
 
     if invoice
-      invoice.attributes = params[:invoice]
+      invoice.partner = Partner.find_by(id: params[:invoice][:partner])
+      invoice.items = params[:invoice][:items].to_json
+      invoice.total = calculate_total(format_items(params[:invoice][:items]))
+      invoice.deal_date = params[:invoice][:deal_date]
 
       if invoice.save
         json :success => true, :message => t('edit_invoice.messages.success')
