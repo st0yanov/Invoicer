@@ -42,6 +42,7 @@ class PaymentsController < ApplicationController
 
   get '/edit/:id' do |id|
     @payment = Payment.find_by(id: id)
+    @invoices = Invoice.where(paid: false).order(id: :desc)
 
     if @payment
       erb :edit_payment, :layout => :admin_layout

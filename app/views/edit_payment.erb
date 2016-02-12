@@ -1,0 +1,50 @@
+<% content_for :page_title do %>
+    <%= t('edit_payment.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header"><%= t('edit_payment.content_heading') %></h1>
+    <form id="editPaymentForm" method="post">
+        <div class="form-group">
+            <label class="control-label" for="invoice"><%= t('edit_payment.form.invoice') %></label>
+            <select class="form-control" id="invoice" name="invoice">
+                <% @invoices.each do |invoice| %>
+                    <option value="<%= invoice.id %>" <%= 'selected' if @payment.invoice == invoice %>><%= invoice.number %></option>
+                <% end %>
+            </select>
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="gateway"><%= t('edit_payment.form.gateway') %></label>
+            <input type="text" class="form-control" id="gateway" name="gateway" value="<%= @payment.gateway %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="date"><%= t('edit_payment.form.date') %></label>
+            <input type="date" class="form-control" id="date" name="date" value="<%= @payment.date %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="transaction"><%= t('edit_payment.form.transaction') %></label>
+            <input type="text" class="form-control" id="transaction" name="transaction" value="<%= @payment.transaction %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="value"><%= t('edit_payment.form.value') %></label>
+            <input type="number" class="form-control" id="value" name="value" value="<%= @payment.value %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <button type="submit" class="btn btn-default"><%= t('edit_payment.form.submit') %></button>
+    </form>
+
+    <div class="result alert" role="alert" style="display: none;"></div>
+<% end %>
+
+<% content_for :footer_assets do %>
+    <script type="text/javascript" src="<%= url('/assets/js/custom/edit_payment.js') %>"></script>
+<% end %>
