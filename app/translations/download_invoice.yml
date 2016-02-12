@@ -4,6 +4,9 @@ bg-BG:
     invoice: Фактура
     original: Оригинал
 
+    paid: Платена
+    unpaid: Неплатена
+
     issue_date: Дата на издаване
     deal_date: Дата на данъчно събитие
 
@@ -29,6 +32,8 @@ bg-BG:
         date: Дата
         transaction: Транзакция
         value: Стойност
+      due: Дължима сума
+      no_payments: Все още няма извършени плащания.
 
     messages:
       invalid_format: Невалиден изходен формат.

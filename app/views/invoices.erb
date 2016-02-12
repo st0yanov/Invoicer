@@ -32,9 +32,9 @@
                                 <%= "<br>#{invoice.partner.eik}" unless invoice.partner.eik.empty? %>
                             <% end %>
                         </td>
-                        <td><%= "#{invoice.total} #{t('invoices.currencies.bgn')}" %></td>
+                        <td><%= '%.2f' % invoice.total.to_s %> <%= t('invoices.currencies.bgn') %></td>
                         <td>
-                            <% if invoice.paid == 1 %>
+                            <% if invoice.paid == true %>
                                 <span class="glyphicon glyphicon-ok"></span>
                             <% else %>
                                 <span class="glyphicon glyphicon-remove"></span>
@@ -45,6 +45,8 @@
                             <form class="deleteInvoice" method="delete" action="<%= url('/delete/'+invoice.id.to_s) %>">
                                 <a href="<%= url('/edit/'+invoice.id.to_s) %>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
                                 <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                <a href="<%= url('/download/'+invoice.id.to_s+'?format=html') %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list-alt"></span></a>
+                                <a href="<%= url('/download/'+invoice.id.to_s+'?format=pdf') %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-print"></span></a>
                             </form>
                         </td>
                     </tr>

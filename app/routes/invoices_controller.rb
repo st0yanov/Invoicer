@@ -1,5 +1,6 @@
 require 'sinatra/content_for'
 require 'sinatra/json'
+require 'pdfkit'
 
 class InvoicesController < ApplicationController
   helpers Sinatra::ContentFor, InvoiceHelpers
@@ -83,12 +84,17 @@ class InvoicesController < ApplicationController
 
   get '/download/:id' do |id|
     @invoice = Invoice.find_by(id: id)
+    @payments = @invoice.payments
 
     case params[:format]
     when 'html'
       erb :invoice_template, :layout => false
     when 'pdf'
-
+      html = erb :invoice_template, :layout => false
+      kit = PDFKit.new(html)
+      pdf = kit.to_pdf
+      content_type 'application/pdf'
+      body pdf
     else
       halt 404, t('download_invoice.messages.invalid_format')
     end

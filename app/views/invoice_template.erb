@@ -11,8 +11,6 @@
 		.invoiceContainer {
 			width: 650px;
 			height: auto;
-			border: 1px solid #000000;
-			padding: 15px;
 			margin: 0 auto;
 		}
 
@@ -73,12 +71,13 @@
 <div class="invoiceContainer">
 	<div>
 		<div class="left">
-			<h1><%= @invoice.document_type == 0 ? t('download_invoice.proforma') : t('download_invoice.invoice') %>:</h1>
+			<h1><%= @invoice.paid == false ? t('download_invoice.proforma') : t('download_invoice.invoice') %>:</h1>
 			<h2>№ <%= @invoice.number %></h2>
 		</div>
 
-		<div class="right">
-			<h2 class="original"><%= t('download_invoice.original') %></h2>
+		<div class="right text-right">
+			<h1 class="original"><%= t('download_invoice.original') %></h1>
+			<h2><%= @invoice.paid ? t('download_invoice.paid') : t('download_invoice.unpaid') %></h2>
 		</div>
 
 		<div class="clearfix"></div>
@@ -141,9 +140,9 @@
 				</tr>
 				<tr>
 					<th width="5%">#</th>
-					<th width="50%"><%= t('download_invoice.table.description') %></th>
+					<th width="45%"><%= t('download_invoice.table.description') %></th>
 					<th width="10%"><%= t('download_invoice.table.unit') %></th>
-					<th width="5%"><%= t('download_invoice.table.quantity') %></th>
+					<th width="10%"><%= t('download_invoice.table.quantity') %></th>
 					<th width="5%"><%= t('download_invoice.table.unit_price') %></th>
 					<th width="5%"><%= t('download_invoice.table.discount') %></th>
 					<th width="5%"><%= t('download_invoice.table.value') %></th>
@@ -177,8 +176,9 @@
 
 			<tfoot>
 				<tr>
-					<td colspan="6"></td>
-					<td class="bold" style="border: none;"><%= t('download_invoice.table.total') %></td>
+					<td colspan="4"></td>
+					<td colspan="2" class="bold" style="border: none;"><%= t('download_invoice.table.total') %>:</td>
+					<td><%= '%.2f' % (total - total_vat).to_s %></td>
 					<td><%= '%.2f' % total_vat.to_s %></td>
 					<td><%= '%.2f' % total.to_s %></td>
 				</tr>
@@ -201,8 +201,31 @@
 			</thead>
 
 			<tbody>
-				
+				<% payments_sum = 0 %>
+				<% if @payments.empty? %>
+					<tr>
+						<td colspan="4"><%= t('download_invoice.payments.no_payments') %></td>
+					</tr>
+				<% else %>
+					<% @payments.each do |payment| %>
+						<% payments_sum += payment.amount %>
+						<tr>
+							<td><%= payment.gateway %></td>
+							<td><%= payment.date %></td>
+							<td><%= payment.transaction_id %></td>
+							<td><%= '%.2f' % payment.amount %></td>
+						</tr>
+					<% end %>
+				<% end %>
 			</tbody>
+
+			<tfoot>
+				<tr>
+					<td colspan="2"></td>
+					<td class="bold"><%= t('download_invoice.payments.due') %>:</td>
+					<td><%= '%.2f' % (total - payments_sum).to_s %></td>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 </div>

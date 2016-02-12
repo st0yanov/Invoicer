@@ -1,5 +1,5 @@
 bg-BG:
-  partners:
+  payments:
     page_title: Плащания
     content_heading: Плащания
 
@@ -8,11 +8,11 @@ bg-BG:
       gateway: Начин на плащане
       date: Дата
       transaction: Транзакция
-      value: Сума
+      amount: Сума
       actions:
         label: Действия
         edit: Редактирай
         delete: Изтрий
 
     no_payments: В момента няма добавени плащания.
-    add_partner: Добави плащане
+    add_payment: Добави плащане

@@ -19,4 +19,14 @@ module InvoiceHelpers
     list.each { |item| total += (item.quantity.to_d * item.unit_price.to_d) - item.discount.to_d }
     total
   end
+
+  def calculate_payments(invoice)
+    payments, sum = Payment.where(invoice: invoice), 0
+    payments.each { |payment| sum += payment.amount }
+    sum
+  end
+
+  def vat_price(invoice)
+    invoice.total + invoice.total * 20/100
+  end
 end

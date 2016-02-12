@@ -8,7 +8,7 @@ bg-BG:
       gateway: Начин на плащане
       date: Дата на плащане
       transaction: Уникален номер на транзакцията
-      value: Сума
+      amount: Сума
       submit: Редактирай
 
     messages:

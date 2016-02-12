@@ -10,6 +10,8 @@ gem 'bcrypt'
 gem 'i18n'
 gem 'eik_validator'
 gem 'valvat'
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   gem 'rerun'

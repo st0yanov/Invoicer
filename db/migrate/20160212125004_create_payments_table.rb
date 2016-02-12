@@ -4,8 +4,8 @@ class CreatePaymentsTable < ActiveRecord::Migration
       t.belongs_to :invoice, index: true
       t.string :gateway, limit: 32, null: false
       t.date :date, null: false
-      t.string :transaction, limit: 64, null: false
-      t.decimal :value, null: false
+      t.string :transaction_id, limit: 64, null: false
+      t.decimal :amount, null: false
     end
   end
 end

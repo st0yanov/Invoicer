@@ -30,5 +30,5 @@ bg-BG:
       validity: Невалиден ДДС номер.
       uniqueness: Партньор с този ДДС номер вече съществува.
 
-    value:
+    amount:
       numericality: Въведената сума е невалидна.

@@ -44,6 +44,7 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     nori (2.6.0)
+    pdfkit (0.8.2)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -105,6 +106,7 @@ GEM
     wasabi (3.5.0)
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
+    wkhtmltopdf-binary (0.9.9.3)
 
 PLATFORMS
   ruby
@@ -116,6 +118,7 @@ DEPENDENCIES
   eik_validator
   i18n
   mysql2
+  pdfkit
   pry
   rack-test
   rake
@@ -126,6 +129,7 @@ DEPENDENCIES
   sinatra-contrib
   sqlite3
   valvat
+  wkhtmltopdf-binary
 
 BUNDLED WITH
    1.11.2

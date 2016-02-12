@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20160212125004) do
 
   create_table "payments", force: :cascade do |t|
     t.integer "invoice_id"
-    t.string  "gateway",     null: false
-    t.date    "date",        null: false
-    t.string  "transaction", null: false
-    t.decimal "value",       null: false
+    t.string  "gateway",        limit: 32, null: false
+    t.date    "date",                      null: false
+    t.string  "transaction_id", limit: 64, null: false
+    t.decimal "amount",                    null: false
   end
 
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id"
