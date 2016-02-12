@@ -14,6 +14,7 @@ class PaymentsController < ApplicationController
   end
 
   get '/add' do
+    @invoices = Invoice.where(paid: false).order(id: :desc)
     erb :add_payment, :layout => :admin_layout
   end
 
@@ -26,7 +27,11 @@ class PaymentsController < ApplicationController
     payment.transaction = params[:transaction]
     payment.value = params[:value]
 
-    if payment.valid?
+    if payment.save
+      if payment.invoice.total == payment.value
+        payment.invoice.paid = true
+        payment.invoice.save!
+      end
       json :success => true, :message => t('add_payment.messages.success')
     else
       json :success => false,

@@ -1,0 +1,17 @@
+bg-BG:
+  edit_payment:
+    page_title: Промяна на плащане
+    content_heading: Промяна на плащане
+
+    form:
+      invoice: Фактура
+      gateway: Начин на плащане
+      date: Дата на плащане
+      transaction: Уникален номер на транзакцията
+      value: Сума
+      submit: Редактирай
+
+    messages:
+      success: Успешно редактирахте това плащане.
+      error: Възникна грешка при редактирането на това плащане.
+      not_found: Несъществуващо плащане.

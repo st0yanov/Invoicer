@@ -1,0 +1,48 @@
+<% content_for :page_title do %>
+    <%= t('payments.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header clearfix">
+        <%= t('payments.content_heading') %>
+        <a href="<%= url('/add') %>" class="btn btn-primary" style="float: right;"><%= t('payments.add_payment') %></a>
+    </h1>
+
+    <% if payments.size > 0 %>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <td><%= t('payments.table.invoice') %></td>
+                    <td><%= t('payments.table.gateway') %></td>
+                    <td><%= t('payments.table.date') %></td>
+                    <td><%= t('payments.table.transaction') %></td>
+                    <td><%= t('payments.table.value') %></td>
+                    <td><%= t('payments.table.actions.label') %></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% payments.each do |payment| %>
+                    <tr>
+                        <td><%= payment.invoice.number %></td>
+                        <td><%= payment.gateway %></td>
+                        <td><%= payment.date %></td>
+                        <td><%= payment.transaction %></td>
+                        <td><%= payment.value %></td>
+                        <td>
+                            <form class="deletePayment" method="delete" action="<%= url('/delete/'+payment.id.to_s) %>">
+                                <a href="<%= url('/edit/'+payment.id.to_s) %>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% else %>
+        <h3><%= t('payments.no_payments') %></h3>
+    <% end %>
+<% end %>
+
+<% content_for :footer_assets do %>
+    <script type="text/javascript" src="<%= url('/assets/js/custom/payments.js') %>"></script>
+<% end %>
