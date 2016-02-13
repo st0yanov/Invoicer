@@ -24,7 +24,7 @@ class PaymentsController < ApplicationController
     payment.invoice = Invoice.find_by(id: params[:invoice])
     payment.gateway = params[:gateway]
     payment.date = params[:date]
-    payment.transaction_id = params[:transaction]
+    payment.transaction_id = params[:transaction_id]
     payment.amount = params[:amount]
 
     if payment.save
@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
       @payment.invoice = Invoice.find_by(id: params[:invoice])
       @payment.gateway = params[:gateway]
       @payment.date = params[:date]
-      @payment.transaction_id = params[:transaction]
+      @payment.transaction_id = params[:transaction_id]
       @payment.amount = params[:amount]
 
       if @payment.save

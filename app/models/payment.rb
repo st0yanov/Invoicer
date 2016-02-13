@@ -1,7 +1,7 @@
 class Payment < ActiveRecord::Base
   belongs_to :invoice
 
-  validates :gateway, :date, :transaction_id, :amount, presence: {
+  validates :invoice, :gateway, :date, :transaction_id, :amount, presence: {
     message: I18n.t('validation.presence')
   }
 
