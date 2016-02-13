@@ -1,0 +1,18 @@
+bg-BG:
+  payments:
+    page_title: Плащания
+    content_heading: Плащания
+
+    table:
+      invoice: Фактура
+      gateway: Начин на плащане
+      date: Дата
+      transaction: Транзакция
+      amount: Сума
+      actions:
+        label: Действия
+        edit: Редактирай
+        delete: Изтрий
+
+    no_payments: В момента няма добавени плащания.
+    add_payment: Добави плащане

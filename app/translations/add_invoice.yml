@@ -1,0 +1,23 @@
+bg-BG:
+  add_invoice:
+    page_title: Добави фактура
+    content_heading: Добави фактура
+
+    form:
+      partner: Партньор
+      deal_date: Дата на сделката
+      products_services: Продукти и услуги
+      table:
+        description: Описание
+        unit: Мярка
+        quantity: Количество
+        unit_price: Единична цена
+        discount: Отстъпка
+        actions: Действия
+        
+      add_item: Добави нов ред
+      submit: Запази фактурата
+
+    messages:
+      success: Успешно добавихте нова фактура.
+      error: Възникна грешка при добавянето на нова фактура.

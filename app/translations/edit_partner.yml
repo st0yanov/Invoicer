@@ -1,0 +1,22 @@
+bg-BG:
+  edit_partner:
+    page_title: Промяна на партньор
+    content_heading: Промяна на партньор
+
+    form:
+      first_name: Име
+      last_name: Фамилия
+      country: Държава
+      city: Град
+      postcode: Пощенски код
+      address: Адрес
+      phone_number: Телефон
+      company_name: Фирма
+      eik: ЕИК
+      vat_id: ДДС №
+      submit: Редактирай
+
+    messages:
+      success: Успешно редактирахте този партньор.
+      error: Възникна грешка при редактирането на този партньор.
+      not_found: Несъществуващ партньор.

@@ -1,0 +1,23 @@
+bg-BG:
+  invoices:
+    page_title: Фактури
+    content_heading: Фактури
+
+    proforma: Проформа
+
+    table:
+      number: Номер
+      partner: Партньор
+      total: Стойност
+      paid: Платено
+      date: Дата
+      actions:
+        label: Действия
+        edit: Редактирай
+        delete: Изтрий
+
+    currencies:
+      bgn: лв
+
+    no_invoices: В момента няма добавени фактури.
+    add_invoice: Добави фактура

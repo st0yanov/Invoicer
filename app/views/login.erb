@@ -1,0 +1,30 @@
+<% content_for :page_title do %><%= t('login.page_title') %><% end %>
+
+<% content_for :header_assets do %>
+	<link href="<%= url('/assets/css/custom/signin.css') %>" rel="stylesheet">
+<% end %>
+
+<% content_for :page_content do %>
+	<div class="container">
+		<form class="form-signin" id="loginForm" method="post">
+			<h2 class="form-signin-heading"><%= t('login.form.heading') %></h2>
+
+			<label for="username" class="sr-only"><%= t('login.form.username') %></label>
+			<input type="text" id="username" name="username" class="form-control" required autofocus>
+
+			<label for="password" class="sr-only"><%= t('login.form.password') %></label>
+			<input type="password" id="password" name="password" class="form-control" required>
+
+			<div class="checkbox">
+				<label><input type="checkbox" name="remember" value="1"> <%= t('login.form.remember_me') %></label>
+			</div>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><%= t('login.form.submit') %></button>
+		</form>
+		<div class="result alert" role="alert" style="display: none;"></div>
+    </div> <!-- /container -->
+<% end %>
+
+<% content_for :footer_assets do %>
+	<script type="text/javascript" src="<%= url('/assets/js/custom/login.js') %>"></script>
+<% end %>

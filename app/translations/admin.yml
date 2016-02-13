@@ -1,0 +1,12 @@
+bg-BG:
+  admin:
+    top_menu:
+      search: Търсачка...
+      about: За системата
+      help: Помощ
+
+    side_menu:
+      home: Начало
+      partners: Партньори
+      invoices: Фактури
+      payments: Плащания

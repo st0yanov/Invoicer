@@ -1,0 +1,80 @@
+<% content_for :page_title do %>
+    <%= t('edit_partner.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header"><%= t('edit_partner.content_heading') %></h1>
+    <form id="editPartnerForm" method="post">
+        <div class="form-group">
+            <label class="control-label" for="first_name"><%= t('edit_partner.form.first_name') %></label>
+            <input type="text" class="form-control" id="first_name" name="partner[first_name]" value="<%= partner.first_name %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="last_name"><%= t('edit_partner.form.last_name') %></label>
+            <input type="text" class="form-control" id="last_name" name="partner[last_name]" value="<%= partner.last_name %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="country"><%= t('edit_partner.form.country') %></label>
+            <select class="form-control" id="country" name="partner[country]">
+            	<option value="BG" <% if partner.country == 'BG' %>selected<% end %>><%= t('countries.BG') %></option>
+            	<option value="DE" <% if partner.country == 'DE' %>selected<% end %>><%= t('countries.DE') %></option>
+            	<option value="UK" <% if partner.country == 'UK' %>selected<% end %>><%= t('countries.UK') %></option>
+            </select>
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="city"><%= t('edit_partner.form.city') %></label>
+            <input type="text" class="form-control" id="city" name="partner[city]" value="<%= partner.city %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="postcode"><%= t('edit_partner.form.postcode') %></label>
+            <input type="number" class="form-control" id="postcode" name="partner[postcode]" value="<%= partner.postcode %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="address"><%= t('edit_partner.form.address') %></label>
+            <input type="text" class="form-control" id="address" name="partner[address]" value="<%= partner.address %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="phone_number"><%= t('edit_partner.form.phone_number') %></label>
+            <input type="tel" class="form-control" id="phone_number" name="partner[phone_number]" value="<%= partner.phone_number %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="company_name"><%= t('edit_partner.form.company_name') %></label>
+            <input type="text" class="form-control" id="company_name" name="partner[company_name]" value="<%= partner.company_name %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="eik"><%= t('edit_partner.form.eik') %></label>
+            <input type="text" class="form-control" id="eik" name="partner[eik]" value="<%= partner.eik %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="vat_id"><%= t('edit_partner.form.vat_id') %></label>
+            <input type="text" class="form-control" id="vat_id" name="partner[vat_id]" value="<%= partner.vat_id %>">
+            <span class="help-block" style="display: none;"></span>
+        </div>
+
+        <button type="submit" class="btn btn-default"><%= t('edit_partner.form.submit') %></button>
+    </form>
+
+    <div class="result alert" role="alert" style="display: none;"></div>
+<% end %>
+
+<% content_for :footer_assets do %>
+    <script type="text/javascript" src="<%= url('/assets/js/custom/edit_partner.js') %>"></script>
+<% end %>

@@ -1,0 +1,48 @@
+<% content_for :page_title do %>
+    <%= t('partners.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header clearfix">
+        <%= t('partners.content_heading') %>
+        <a href="<%= url('/add') %>" class="btn btn-primary" style="float: right;"><%= t('partners.add_partner') %></a>
+    </h1>
+
+    <% if partners.size > 0 %>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <td><%= t('partners.table.first_name') %></td>
+                    <td><%= t('partners.table.last_name') %></td>
+                    <td><%= t('partners.table.company_name') %></td>
+                    <td><%= t('partners.table.eik') %></td>
+                    <td><%= t('partners.table.vat_id') %></td>
+                    <td><%= t('partners.table.actions.label') %></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% partners.each do |partner| %>
+                    <tr>
+                        <td><%= partner.first_name %></td>
+                        <td><%= partner.last_name %></td>
+                        <td><%= partner.company_name.empty? ? '<span class="glyphicon glyphicon-minus"></span>' : partner.company_name %></td>
+                        <td><%= partner.eik.nil? ? '<span class="glyphicon glyphicon-minus"></span>' : partner.eik %></td>
+                        <td><%= partner.vat_id.empty? ? '<span class="glyphicon glyphicon-minus"></span>' : partner.vat_id %></td>
+                        <td>
+                            <form class="deletePartner" method="delete" action="<%= url('/delete/'+partner.id.to_s) %>">
+                                <a href="<%= url('/edit/'+partner.id.to_s) %>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% else %>
+        <h3><%= t('partners.no_partners') %></h3>
+    <% end %>
+<% end %>
+
+<% content_for :footer_assets do %>
+    <script type="text/javascript" src="<%= url('/assets/js/custom/partners.js') %>"></script>
+<% end %>

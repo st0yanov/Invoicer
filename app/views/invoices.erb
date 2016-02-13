@@ -1,0 +1,63 @@
+<% content_for :page_title do %>
+    <%= t('invoices.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header clearfix">
+        <%= t('invoices.content_heading') %>
+        <a href="<%= url('/add') %>" class="btn btn-primary" style="float: right;"><%= t('invoices.add_invoice') %></a>
+    </h1>
+
+    <% if invoices.size > 0 %>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <td><%= t('invoices.table.number') %></td>
+                    <td><%= t('invoices.table.partner') %></td>
+                    <td><%= t('invoices.table.total') %></td>
+                    <td><%= t('invoices.table.paid') %></td>
+                    <td><%= t('invoices.table.date') %></td>
+                    <td><%= t('invoices.table.actions.label') %></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% invoices.each do |invoice| %>
+                    <tr>
+                        <td><%= "#{t('invoices.proforma')}-" if invoice.document_type == 0 %><%= invoice.number %></td>
+                        <td>
+                            <% if invoice.partner.company_name.empty? %>
+                                <%= "#{invoice.partner.first_name} #{invoice.partner.last_name}" %>
+                            <% else %>
+                                <%= "#{invoice.partner.company_name}" %>
+                                <%= "<br>#{invoice.partner.eik}" unless invoice.partner.eik.nil? %>
+                            <% end %>
+                        </td>
+                        <td><%= '%.2f' % invoice.total.to_s %> <%= t('invoices.currencies.bgn') %></td>
+                        <td>
+                            <% if invoice.paid == true %>
+                                <span class="glyphicon glyphicon-ok"></span>
+                            <% else %>
+                                <span class="glyphicon glyphicon-remove"></span>
+                            <% end %>
+                        </td>
+                        <td><%= invoice.created_at.strftime('%F') %></td>
+                        <td>
+                            <form class="deleteInvoice" method="delete" action="<%= url('/delete/'+invoice.id.to_s) %>">
+                                <a href="<%= url('/edit/'+invoice.id.to_s) %>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                <a href="<%= url('/download/'+invoice.id.to_s+'?format=html') %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list-alt"></span></a>
+                                <a href="<%= url('/download/'+invoice.id.to_s+'?format=pdf') %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-print"></span></a>
+                            </form>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% else %>
+        <h3><%= t('invoices.no_invoices') %></h3>
+    <% end %>
+<% end %>
+
+<% content_for :footer_assets do %>
+    <script type="text/javascript" src="<%= url('/assets/js/custom/invoices.js') %>"></script>
+<% end %>
