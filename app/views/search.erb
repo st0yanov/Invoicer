@@ -1,0 +1,54 @@
+<% content_for :page_title do %>
+    <%= t('search.page_title') %>
+<% end %>
+
+<% content_for :page_content do %>
+    <h1 class="page-header clearfix">
+        <%= t('search.content_heading') %>
+    </h1>
+
+    <h2><%= t('search.partners') %></h2>
+    <% if @data[:partners].size > 0 %>
+        <ul>
+            <% @data[:partners].each do |result| %>
+                <li>
+                    <a href="/partners/edit/<%= result.id %>">
+                    <%= result.company_name.empty? ? result.first_name + ' ' + result.last_name : result.company_name %>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <h3><%= t('search.no_results') %></h3>
+    <% end %>
+
+    <h2><%= t('search.invoices') %></h2>
+    <% if @data[:invoices].size > 0 %>
+        <ul>
+            <% @data[:invoices].each do |result| %>
+                <li>
+                    <a href="/invoices/edit/<%= result.id %>">
+                    <%= "#{t('invoices.proforma')}-" if result.document_type == 0 %><%= result.number %>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <h3><%= t('search.no_results') %></h3>
+    <% end %>
+
+    <h2><%= t('search.payments') %></h2>
+    <% if @data[:payments].size > 0 %>
+        <ul>
+            <% @data[:payments].each do |result| %>
+                <li>
+                    <a href="/payments/edit/<%= result.id %>">
+                    <%= "#{result.id} - #{result.gateway}" %>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <h3><%= t('search.no_results') %></h3>
+    <% end %>
+<% end %>

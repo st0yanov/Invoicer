@@ -20,6 +20,9 @@ $(function() {
 
             if (data['success']) {
                 resultText.removeClass('alert-success alert-danger').addClass('alert-success');
+                setTimeout(function() {
+                    window.location = '/partners';
+                }, 1500);
             } else {
                 resultText.removeClass('alert-success alert-danger').addClass('alert-danger');
             }

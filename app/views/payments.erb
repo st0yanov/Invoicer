@@ -23,7 +23,7 @@
             <tbody>
                 <% @payments.each do |payment| %>
                     <tr>
-                        <td><%= payment.invoice.number %></td>
+                        <td><%= "#{t('invoices.proforma')}-" if payment.invoice.document_type == 0 %><%= payment.invoice.number %></td>
                         <td><%= payment.gateway %></td>
                         <td><%= payment.date %></td>
                         <td><%= payment.transaction_id %></td>
